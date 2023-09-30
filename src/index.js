@@ -1,19 +1,35 @@
-import Notiflix from 'notiflix';
-import 'notiflix/dist/notiflix-3.2.6.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { fetchPhotoByQuery, renderPhotoCard } from './fetch-api.js';
-import axios from 'axios';
+import PhotoApiService from './photo-service.js';
+import { renderPhotoCard } from './fetch-api.js';
+// =====================================================
 
 const searchForm = document.querySelector('#search-form');
 const galleryWrapper = document.querySelector('.gallery');
+const loadMoreBtn = document.querySelector('.load-more');
 
-searchForm.addEventListener('submit', onFormSubmit);
+const photoApiService = new PhotoApiService();
 
-function onFormSubmit(e) {
+searchForm.addEventListener('submit', onSearch);
+loadMoreBtn.addEventListener('click', onLoadMore);
+
+async function onSearch(e) {
   e.preventDefault();
   galleryWrapper.innerHTML = '';
-  const query = e.target['searchQuery'].value;
+  photoApiService.query = searchForm.searchQuery.value;
+  try {
+    const data = await photoApiService.fetchPhoto();
+    renderPhotoCard(data);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
-  fetchPhotoByQuery(query).then(data => renderPhotoCard(data));
+async function onLoadMore() {
+  try {
+    const data = await photoApiService.fetchPhoto();
+    renderPhotoCard(data);
+  } catch (error) {
+    console.log(error.message);
+  }
 }

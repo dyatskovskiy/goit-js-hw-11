@@ -2,7 +2,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 250ms;
+}
+
 .container {
+  margin-bottom: 10px;
   max-width: 100%;
   border-radius: 4px;
   background: #7ba7ab;
@@ -27,6 +33,7 @@
   background: #f9f0da;
   color: #9e9c9c;
 }
+
 .search-form button {
   position: absolute;
   top: 0;
@@ -38,6 +45,7 @@
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
+
 .search-form button:before {
   content: '\f002';
   font-family: FontAwesome;
@@ -46,7 +54,7 @@
 }
 
 /* Gallery styles */
-.gallery {
+/* .gallery {
   margin: 20px auto 0;
   width: 1200px;
   display: grid;
@@ -59,10 +67,6 @@
   overflow: hidden;
 }
 
-.info {
-  display: flex;
-  height: 40px;
-}
 
 img {
   border-bottom-left-radius: 6px;
@@ -71,10 +75,11 @@ img {
   height: 280px;
   object-fit: cover;
   margin-bottom: 2px;
-}
+} */
 
 /* return `<div class="photo-card">
-        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+    <a href="">
+      <img src="${webformatURL}" alt="${tags}" loading="lazy" /></a>
         <div class="info">
           <p class="info-item">
             <b>Likes</b> ${likes}
@@ -92,3 +97,54 @@ img {
       </div> `;
       }
     ) */
+
+.gallery {
+  display: grid;
+  max-width: 1140px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-auto-rows: 240px;
+  grid-column-gap: 24px;
+  grid-row-gap: 40px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-card {
+  position: relative;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.gallery img:hover {
+  transform: scale(1.03);
+}
+
+.gallery img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform var(--animation-duration) var(--timing-function);
+}
+
+.photo-link {
+  display: block;
+  text-decoration: none;
+  height: 100%;
+}
+
+.photo-link:hover {
+  cursor: zoom-in;
+}
+
+.info {
+  height: 35px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+.info-item {
+  text-wrap: wrap;
+  align-self: center;
+  text-align: center;
+}
