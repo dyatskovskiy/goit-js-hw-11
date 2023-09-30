@@ -2,33 +2,18 @@ import Notiflix from 'notiflix';
 import 'notiflix/dist/notiflix-3.2.6.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { fetchPhotoByQuery } from './fetch-api.js';
+import { fetchPhotoByQuery, renderPhotoCard } from './fetch-api.js';
 import axios from 'axios';
 
 const searchForm = document.querySelector('#search-form');
-const queryInput = document.querySelector('input');
-const searchBtn = document.querySelector('.search-btn');
+const galleryWrapper = document.querySelector('.gallery');
 
-searchForm.addEventListener('click', onSubmitClick);
+searchForm.addEventListener('submit', onFormSubmit);
 
-function onSubmitClick(event) {
-  event.preventDefault();
+function onFormSubmit(e) {
+  e.preventDefault();
+  galleryWrapper.innerHTML = '';
+  const query = e.target['searchQuery'].value;
+
+  fetchPhotoByQuery(query).then(data => renderPhotoCard(data));
 }
-
-// <div class="photo-card">
-//   <img src="" alt="" loading="lazy" />
-//   <div class="info">
-//     <p class="info-item">
-//       <b>Likes</b>
-//     </p>
-//     <p class="info-item">
-//       <b>Views</b>
-//     </p>
-//     <p class="info-item">
-//       <b>Comments</b>
-//     </p>
-//     <p class="info-item">
-//       <b>Downloads</b>
-//     </p>
-//   </div>
-// </div>;
