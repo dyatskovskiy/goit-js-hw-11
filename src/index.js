@@ -1,7 +1,7 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import PhotoApiService from './photo-service.js';
-import { renderPhotoCard } from './fetch-api.js';
+import { renderPhotoCard } from './render.js';
 // =====================================================
 
 const searchForm = document.querySelector('#search-form');
