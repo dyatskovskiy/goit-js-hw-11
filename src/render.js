@@ -1,3 +1,6 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const galleryWrapper = document.querySelector('.gallery');
 
 export function renderPhotoCard(data) {
@@ -35,4 +38,5 @@ export function renderPhotoCard(data) {
     .join('');
 
   galleryWrapper.insertAdjacentHTML('beforeend', markup);
+  const gallery = new SimpleLightbox('.gallery .photo-link');
 }
