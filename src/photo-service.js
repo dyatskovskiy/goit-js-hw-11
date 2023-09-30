@@ -6,13 +6,6 @@ export default class PhotoApiService {
     this.page = 1;
   }
 
-  get query() {
-    return this.searchQuery;
-  }
-  set query(newQuery) {
-    this.searchQuery = newQuery;
-  }
-
   async fetchPhoto() {
     const url = 'https://pixabay.com/api/';
 
@@ -42,7 +35,23 @@ export default class PhotoApiService {
       throw new Error(response.statusText);
     }
 
-    this.page += 1;
+    this.incrementPageCount();
     return await response.data.hits;
+  }
+
+  incrementPageCount() {
+    this.page += 1;
+  }
+
+  resetPageCount() {
+    this.page = 1;
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+
+  set query(newQuery) {
+    this.searchQuery = newQuery;
   }
 }
