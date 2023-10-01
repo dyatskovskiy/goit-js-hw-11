@@ -6,6 +6,7 @@ import Notiflix from 'notiflix';
 
 const searchForm = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
+const footerWrapper = document.querySelector('.footer');
 
 const photoApiService = new PhotoApiService();
 
@@ -34,6 +35,7 @@ async function onSearch(e) {
     clearGallery();
     renderPhotoCard(data);
     loadMoreBtn.classList.remove('visually-hidden');
+    footerWrapper.classList.remove('visually-hidden');
   } catch (error) {
     console.log(error.message);
   }
@@ -44,6 +46,7 @@ async function onLoadMore() {
     const data = await photoApiService.fetchPhoto();
 
     renderPhotoCard(data);
+    scrollDown();
   } catch (error) {
     console.log(error.message);
   }
@@ -51,4 +54,15 @@ async function onLoadMore() {
 
 function clearGallery() {
   document.querySelector('.gallery').innerHTML = '';
+}
+
+function scrollDown() {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 3.4,
+    behavior: 'smooth',
+  });
 }
