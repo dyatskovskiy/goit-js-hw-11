@@ -6,6 +6,9 @@
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   --animation-duration: 250ms;
 }
+body {
+  background-color: #d2f6fa;
+}
 
 .visually-hidden {
   position: absolute;
@@ -22,9 +25,9 @@
 }
 
 .container {
-  margin-bottom: 10px;
-  max-width: 100%;
-  border-radius: 4px;
+  margin: 5px auto 10px;
+  max-width: 95%;
+  border-radius: 15px;
   background: #7ba7ab;
   -webkit-box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.45);
   -moz-box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.45);
@@ -37,8 +40,15 @@
   z-index: 100;
 }
 
-.container.footer {
+.container-footer {
+  margin-bottom: 10px;
   margin-top: 50px;
+  max-width: 100%;
+  border-radius: 4px;
+  background: #7ba7ab;
+  -webkit-box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.45);
   padding: 20px 50%;
   align-items: center;
   justify-content: center;
@@ -145,4 +155,29 @@ button.load-more:hover {
   text-wrap: wrap;
   align-self: center;
   text-align: center;
+}
+
+.top-button {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  transform: translateY(200px);
+  background: #64888b;
+  border: none;
+  border-radius: 50px;
+  color: #000;
+  padding: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  transition: all 400ms ease;
+}
+
+.top-button:hover {
+  background: #75c0b0;
+}
+
+.top-button.js-is-show {
+  transform: translateY(0px);
 }

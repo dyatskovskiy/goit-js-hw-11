@@ -6,9 +6,17 @@ import Notiflix from 'notiflix';
 
 const searchForm = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
-const footerWrapper = document.querySelector('.footer');
+const footerWrapper = document.querySelector('.container-footer');
+const topButton = document.querySelector('.top-button');
 
 const photoApiService = new PhotoApiService();
+
+topButton.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+});
 
 searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore);
@@ -25,7 +33,6 @@ async function onSearch(e) {
       timeout: 1500,
     });
   }
-
   photoApiService.query = searchForm.searchQuery.value;
   photoApiService.resetPageCount();
 
@@ -47,6 +54,7 @@ async function onLoadMore() {
 
     renderPhotoCard(data);
     scrollDown();
+    showTopBtn();
   } catch (error) {
     console.log(error.message);
   }
@@ -65,4 +73,8 @@ function scrollDown() {
     top: cardHeight * 3.4,
     behavior: 'smooth',
   });
+}
+
+function showTopBtn() {
+  topButton.classList.add('js-is-show');
 }
