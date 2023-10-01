@@ -31,6 +31,34 @@
   box-shadow: 0px 3px 6px -1px rgba(0, 0, 0, 0.45);
 }
 
+.container.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}
+
+.container.footer {
+  margin-top: 50px;
+  padding: 20px 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+button.load-more {
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  width: 8rem;
+  height: 2rem;
+  background-color: #f9f0da;
+  color: #585858;
+  transition: all ease 400ms;
+}
+
+button.load-more:hover {
+  transform: scale(1.15);
+}
+
 .search-form {
   position: relative;
   width: 300px;
@@ -45,7 +73,7 @@
   border-radius: 5px;
   outline: none;
   background: #f9f0da;
-  color: #9e9c9c;
+  color: #585858;
 }
 
 .search-form button {
@@ -67,55 +95,11 @@
   color: #f9f0da;
 }
 
-/* Gallery styles */
-/* .gallery {
-  margin: 20px auto 0;
-  width: 1200px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-}
-.photo-card {
-  border-top: 1px solid #7ba7ab;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-
-img {
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  margin-bottom: 2px;
-} */
-
-/* return `<div class="photo-card">
-    <a href="">
-      <img src="${webformatURL}" alt="${tags}" loading="lazy" /></a>
-        <div class="info">
-          <p class="info-item">
-            <b>Likes</b> ${likes}
-          </p>
-          <p class="info-item">
-            <b>Views</b> ${views}
-          </p>
-          <p class="info-item">
-            <b>Comments</b> ${comments}
-          </p>
-          <p class="info-item">
-            <b>Downloads</b> ${downloads}
-          </p>
-        </div>
-      </div> `;
-      }
-    ) */
-
+/* GALLERY STYLES */
 .gallery {
   display: grid;
   max-width: 1140px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-auto-rows: 240px;
   grid-column-gap: 24px;
   grid-row-gap: 40px;

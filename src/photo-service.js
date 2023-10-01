@@ -4,9 +4,11 @@ export default class PhotoApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.resultCount = 0;
   }
 
   async fetchPhoto() {
+    const loadMoreBtn = document.querySelector('.load-more');
     const url = 'https://pixabay.com/api/';
 
     const options = {
@@ -30,12 +32,26 @@ export default class PhotoApiService {
 
     if (response.data.totalHits == 0) {
       Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
+        'Sorry, there are no images matching your search query. Please try again.',
+        {
+          position: 'center-center',
+          cssAnimationStyle: 'zoom',
+          timeout: 1500,
+        }
       );
+
       throw new Error(response.statusText);
     }
 
     this.incrementPageCount();
+
+    if (response.data.hits.length < 40 || this.page == 14) {
+      Notiflix.Notify.info(
+        "We're sorry, but you've reached the end of search results."
+      );
+      loadMoreBtn.classList.add('visually-hidden');
+    }
+    this.resultCount = response.data.totalHits;
     return await response.data.hits;
   }
 
@@ -45,6 +61,10 @@ export default class PhotoApiService {
 
   resetPageCount() {
     this.page = 1;
+  }
+
+  showResultCount() {
+    Notiflix.Notify.success(`Hooray! We found ${this.resultCount} images.`);
   }
 
   get query() {

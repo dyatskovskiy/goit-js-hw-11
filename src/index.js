@@ -1,4 +1,3 @@
-import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import PhotoApiService from './photo-service.js';
 import { renderPhotoCard } from './render.js';
@@ -16,11 +15,22 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 async function onSearch(e) {
   e.preventDefault();
 
+  if (searchForm.searchQuery.value.length <= 2) {
+    return Notiflix.Notify.warning('Please enter more than 2 characters!', {
+      position: 'center-center',
+      cssAnimationStyle: 'zoom',
+      backOverlay: true,
+      backOverlayColor: '#149390',
+      timeout: 1500,
+    });
+  }
+
   photoApiService.query = searchForm.searchQuery.value;
   photoApiService.resetPageCount();
 
   try {
     const data = await photoApiService.fetchPhoto();
+    photoApiService.showResultCount();
     clearGallery();
     renderPhotoCard(data);
     loadMoreBtn.classList.remove('visually-hidden');
@@ -32,6 +42,7 @@ async function onSearch(e) {
 async function onLoadMore() {
   try {
     const data = await photoApiService.fetchPhoto();
+
     renderPhotoCard(data);
   } catch (error) {
     console.log(error.message);
