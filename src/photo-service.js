@@ -9,6 +9,7 @@ export default class PhotoApiService {
 
   async fetchPhoto() {
     const loadMoreBtn = document.querySelector('.load-more');
+
     const url = 'https://pixabay.com/api/';
 
     const options = {

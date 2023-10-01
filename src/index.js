@@ -41,6 +41,11 @@ async function onSearch(e) {
     photoApiService.showResultCount();
     clearGallery();
     renderPhotoCard(data);
+    if (data.length >= 40) {
+      showTopBtn();
+    } else {
+      hideTopBtn();
+    }
     loadMoreBtn.classList.remove('visually-hidden');
     footerWrapper.classList.remove('visually-hidden');
   } catch (error) {
@@ -54,7 +59,6 @@ async function onLoadMore() {
 
     renderPhotoCard(data);
     scrollDown();
-    showTopBtn();
   } catch (error) {
     console.log(error.message);
   }
@@ -77,4 +81,7 @@ function scrollDown() {
 
 function showTopBtn() {
   topButton.classList.add('js-is-show');
+}
+function hideTopBtn() {
+  topButton.classList.remove('js-is-show');
 }
